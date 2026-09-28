@@ -1,0 +1,55 @@
+# Backward Agent
+
+> Build the finished file first, then walk backward to the last act that would make that file real, then run forward.
+
+## Purpose
+Make an agent by naming the done picture before any tools or prompts. The original program lives at fitzyracing1/backward-agent. This page only explains that program in everyday words.
+
+## How it works (plain English)
+1. Write one sentence of the world after success and name the file path.
+2. Write a test that is true only when that file is good enough.
+3. Name the last write or run that would pass the test.
+4. List the smallest facts that last write needs.
+5. Gather those facts.
+6. Turn a short user line into the done picture.
+7. Run forward: intake, gather, last act, test.
+
+## Key ideas
+- Done picture (the finished world in one sentence)
+- Terminal test (a yes-or-no check on a real file)
+- Last act (the one write that should finish the job)
+- Preconditions (facts you can see before that write)
+
+## The actual code
+```
+# files in source repo fitzyracing1/backward-agent
+SKILL.md
+scripts/backward_agent.py
+proof/LAYERS.md
+proof/LAYERS.json
+proof/RESULT.md
+index.html
+
+intake -> done picture -> gather -> check preconditions -> last act -> terminal test
+```
+
+## Line-by-line translation
+1. SKILL.md → “the written rules for last-to-first building”
+2. scripts/backward_agent.py → “the program that runs those rules”
+3. proof/LAYERS.md → “the six layers written down for one goal”
+4. proof/RESULT.md → “proof the test passed”
+5. intake -> … -> terminal test → “run order is forward even though the build order was backward”
+
+## Decisions the program makes
+- If the test fails → treat the failure as a new done picture one layer back and repeat once
+- If the user names no domain → write RESULT.md
+- If tools are listed before the test → that is the wrong order; stop and write the test first
+
+## What a person would notice
+A readable page that says what the agent is for without asking the reader to open Python first.
+
+## Current status
+Barrage clone of a working source repo. Source is not copied file-for-file; the tree is named and explained.
+
+## Next possible steps
+Open the source repo and run scripts/backward_agent.py with one goal.
